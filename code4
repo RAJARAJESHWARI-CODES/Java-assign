@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class AddressBookApp {
+    private static AddressBook addressBook = new AddressBook();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nAddress Book Menu:");
+            System.out.println("1. Add a new contact");
+            System.out.println("2. View all contacts");
+            System.out.println("3. Search for a contact by name");
+            System.out.println("4. Exit");
+
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (option) {
+                case 1:
+                    addNewContact();
+                    break;
+                case 2:
+                    viewAllContacts();
+                    break;
+                case 3:
+                    searchContactByName();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    private static void addNewContact() {
+        System.out.print("Enter contact name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter phone number: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.print("Enter email address: ");
+        String emailAddress = scanner.nextLine();
+
+        Contact newContact = new Contact(name, phoneNumber, emailAddress);
+        addressBook.addContact(newContact);
+        System.out.println("Contact added successfully.");
+    }
+
+    private static void viewAllContacts() {
+        addressBook.viewAllContacts();
+    }
+
+    private static void searchContactByName() {
+        System.out.print("Enter contact name to search: ");
+        String name = scanner.nextLine();
+        addressBook.searchContactByName(name);
+    }
+}
